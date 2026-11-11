@@ -1,8 +1,379 @@
 <!DOCTYPE html>
-<html>
-<head><title>Тест</title></head>
-<body style="background:#ff6b35;color:white;font-size:40px;text-align:center;padding:100px">
-  <h1>САЙТ РАБОТАЕТ! 🎉</h1>
-  <p>Если ты видишь оранжевый экран — всё ок</p>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ИГРОТЕКА — магазин детских игрушек</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #fafafa; color: #222; line-height: 1.5; }
+    a { color: inherit; text-decoration: none; cursor: pointer; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+    .header { background: #ff6b35; color: #fff; padding: 12px 0; position: sticky; top: 0; z-index: 100; }
+    .header__inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .logo { font-size: 24px; font-weight: 700; cursor: pointer; }
+    .nav { display: flex; gap: 20px; }
+    .nav a:hover { opacity: .8; }
+    .header__actions { display: flex; gap: 12px; align-items: center; }
+    .search { padding: 8px 12px; border-radius: 20px; border: none; min-width: 220px; }
+    .btn { padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; background: #fff; color: #ff6b35; font-weight: 600; }
+    .btn--primary { background: #ff6b35; color: #fff; }
+    .btn--ghost { background: transparent; color: #fff; border: 1px solid #fff; }
+    .hero { background: linear-gradient(135deg, #ffd166, #ff6b35); color: #fff; padding: 60px 0; text-align: center; }
+    .hero h1 { font-size: 42px; margin-bottom: 12px; }
+    .hero p { font-size: 18px; }
+    .catalog { display: grid; grid-template-columns: 260px 1fr; gap: 24px; padding: 32px 0; }
+    .filters { background: #fff; padding: 20px; border-radius: 12px; height: fit-content; }
+    .filters h3 { margin-bottom: 12px; }
+    .filter-group { margin-bottom: 16px; }
+    .filter-group label { display: block; margin-bottom: 4px; font-size: 14px; }
+    .filter-group input, .filter-group select { width: 100%; padding: 6px; border: 1px solid #ddd; border-radius: 4px; }
+    .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+    .product-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.08); display: flex; flex-direction: column; transition: transform .2s; }
+    .product-card:hover { transform: translateY(-4px); }
+    .product-card__img { width: 100%; height: 180px; object-fit: cover; background: #f0f0f0; cursor: pointer; }
+    .product-card__body { padding: 12px; flex: 1; display: flex; flex-direction: column; }
+    .product-card__title { font-size: 15px; margin-bottom: 8px; cursor: pointer; }
+    .product-card__price { font-size: 18px; font-weight: 700; color: #ff6b35; margin-top: auto; }
+    .product-page { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 32px 0; }
+    .product-page__img { width: 100%; height: 400px; object-fit: cover; border-radius: 12px; background: #f0f0f0; }
+    .product-page__info h1 { margin-bottom: 12px; }
+    .product-page__price { font-size: 28px; color: #ff6b35; margin: 16px 0; }
+    .cart { padding: 32px 0; }
+    .cart-item { display: grid; grid-template-columns: 80px 1fr auto auto; gap: 16px; align-items: center; background: #fff; padding: 12px; margin-bottom: 8px; border-radius: 8px; }
+    .cart-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 6px; }
+    .cart-summary { background: #fff; padding: 20px; border-radius: 12px; margin-top: 20px; text-align: right; }
+    .cart-summary__total { font-size: 22px; font-weight: 700; margin: 12px 0; }
+    .form { max-width: 420px; margin: 40px auto; background: #fff; padding: 24px; border-radius: 12px; }
+    .form h2 { margin-bottom: 16px; }
+    .form-field { margin-bottom: 14px; }
+    .form-field label { display: block; margin-bottom: 4px; font-size: 14px; }
+    .form-field input, .form-field select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
+    .form-field .error { color: #d33; font-size: 12px; margin-top: 2px; }
+    .admin-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; }
+    .admin-table th, .admin-table td { padding: 10px; border-bottom: 1px solid #eee; text-align: left; }
+    .admin-table th { background: #f5f5f5; }
+    .footer { background: #222; color: #ccc; padding: 32px 0; margin-top: 40px; }
+    .footer__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .notfound { text-align: center; padding: 80px 0; }
+    .notfound h1 { font-size: 80px; color: #ff6b35; }
+    .page { display: none; }
+    .page.active { display: block; }
+    @media (max-width: 768px) {
+      .catalog { grid-template-columns: 1fr; }
+      .product-page { grid-template-columns: 1fr; }
+      .nav { display: none; }
+      .search { min-width: 140px; }
+      .footer__grid { grid-template-columns: 1fr; }
+      .cart-item { grid-template-columns: 60px 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <div class="logo" onclick="showPage('home')">🧸 ИГРОТЕКА</div>
+      <nav class="nav">
+        <a onclick="showPage('home')">Главная</a>
+        <a onclick="showPage('catalog')">Каталог</a>
+        <a id="adminLink" onclick="showPage('adminProducts')" style="display:none">Админ</a>
+      </nav>
+      <input class="search" id="searchInput" placeholder="Поиск игрушек..." onkeypress="if(event.key==='Enter') doSearch()" />
+      <div class="header__actions">
+        <a class="btn" onclick="showPage('cart')">🛒 <span id="cartCount">0</span></a>
+        <span id="userArea"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div id="page-home" class="page active">
+      <section class="hero"><div class="container"><h1>Игрушки, которые развивают!</h1><p>Более 1000 товаров для детей от 0 до 14 лет</p><button class="btn btn--primary" style="margin-top:20px" onclick="showPage('catalog')">Перейти в каталог</button></div></section>
+      <section class="container" style="padding:40px 16px"><h2 style="margin-bottom:20px">🔥 Популярное</h2><div class="products" id="popularProducts"></div></section>
+      <section class="container" style="padding:0 16px 40px"><h2 style="margin-bottom:20px">🆕 Новинки</h2><div class="products" id="newProducts"></div></section>
+    </div>
+
+    <div id="page-catalog" class="page">
+      <div class="container catalog">
+        <aside class="filters">
+          <h3>Фильтры</h3>
+          <div class="filter-group"><label>Категория</label><select id="filterCategory" onchange="renderCatalog()"><option value="">Все</option></select></div>
+          <div class="filter-group"><label>Цена до: <span id="priceLabel">5000</span> ₽</label><input type="range" min="100" max="5000" step="100" value="5000" id="filterPrice" oninput="document.getElementById('priceLabel').textContent=this.value; renderCatalog()" /></div>
+          <div class="filter-group"><label>Сортировка</label><select id="filterSort" onchange="renderCatalog()"><option value="popular">По популярности</option><option value="price_asc">Сначала дешёвые</option><option value="price_desc">Сначала дорогие</option><option value="rating">По рейтингу</option></select></div>
+          <button class="btn" onclick="document.getElementById('filterCategory').value='';document.getElementById('filterPrice').value=5000;document.getElementById('priceLabel').textContent=5000;document.getElementById('filterSort').value='popular';renderCatalog()">Сбросить</button>
+        </aside>
+        <div><h2 style="margin-bottom:20px">Каталог (<span id="catalogCount">0</span>)</h2><div class="products" id="catalogProducts"></div></div>
+      </div>
+    </div>
+
+    <div id="page-product" class="page">
+      <div class="container product-page" id="productPageContent"></div>
+    </div>
+
+    <div id="page-cart" class="page">
+      <div class="container cart" id="cartContent"></div>
+    </div>
+
+    <div id="page-checkout" class="page">
+      <div class="container" style="padding:32px 16px">
+        <h1>Оформление заказа</h1>
+        <form class="form" id="checkoutForm" onsubmit="submitOrder(event)" style="max-width:600px">
+          <div class="form-field"><label>ФИО</label><input id="coName" required/></div>
+          <div class="form-field"><label>Телефон</label><input id="coPhone" required/></div>
+          <div class="form-field"><label>Адрес</label><input id="coAddress" required/></div>
+          <div class="form-field"><label>Доставка</label><select id="coDelivery"><option value="courier">Курьер</option><option value="pickup">Самовывоз</option><option value="post">Почта</option></select></div>
+          <div class="form-field"><label>Оплата</label><select id="coPayment"><option value="card">Картой</option><option value="sbp">СБП</option><option value="cash">При получении</option></select></div>
+          <div style="font-size:18px;margin:16px 0"><b>Итого: <span id="coTotal">0</span> ₽</b></div>
+          <button class="btn btn--primary" style="width:100%">Подтвердить заказ</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="page-login" class="page">
+      <form class="form" onsubmit="doLogin(event)">
+        <h2>Вход</h2>
+        <div class="form-field"><label>Email</label><input id="loginEmail" type="email" required/></div>
+        <div class="form-field"><label>Пароль</label><input id="loginPassword" type="password" required/></div>
+        <div id="loginError" class="error"></div>
+        <button class="btn btn--primary" style="width:100%">Войти</button>
+        <p style="margin-top:12px;text-align:center">Нет аккаунта? <a onclick="showPage('register')" style="color:#ff6b35">Регистрация</a></p>
+      </form>
+    </div>
+
+    <div id="page-register" class="page">
+      <form class="form" onsubmit="doRegister(event)">
+        <h2>Регистрация</h2>
+        <div class="form-field"><label>ФИО</label><input id="regName" required/></div>
+        <div class="form-field"><label>Email</label><input id="regEmail" type="email" required/></div>
+        <div class="form-field"><label>Телефон</label><input id="regPhone" required/></div>
+        <div class="form-field"><label>Адрес</label><input id="regAddress" required/></div>
+        <div class="form-field"><label>Пароль</label><input id="regPassword" type="password" required/></div>
+        <div id="regError" class="error"></div>
+        <button class="btn btn--primary" style="width:100%">Зарегистрироваться</button>
+        <p style="margin-top:12px;text-align:center">Есть аккаунт? <a onclick="showPage('login')" style="color:#ff6b35">Войти</a></p>
+      </form>
+    </div>
+
+    <div id="page-profile" class="page">
+      <div class="container" style="padding:32px 16px" id="profileContent"></div>
+    </div>
+
+    <div id="page-adminProducts" class="page">
+      <div class="container" style="padding:32px 16px" id="adminProductsContent"></div>
+    </div>
+
+    <div id="page-adminOrders" class="page">
+      <div class="container" style="padding:32px 16px" id="adminOrdersContent"></div>
+    </div>
+
+    <div id="page-404" class="page">
+      <div class="container notfound"><h1>404</h1><p>Страница не найдена</p><button class="btn btn--primary" style="margin-top:20px" onclick="showPage('home')">На главную</button></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div><h3>🧸 ИГРОТЕКА</h3><p>Магазин детских игрушек и развивающих игр с доставкой по России.</p></div>
+      <div><h4>Контакты</h4><p>📞 8-800-555-35-35</p><p>✉️ info@igroteka.ru</p><p>📍 г. Юрга, ул. Победы, 1</p></div>
+      <div><h4>Покупателям</h4><p>Доставка и оплата</p><p>Возврат товара</p><p>Гарантия</p></div>
+    </div>
+  </footer>
+
+  <script>
+    const productsData = [
+      { id: 1, title: "Конструктор LEGO Classic 10696", category: "Конструкторы", brand: "LEGO", price: 2490, stock: 15, rating: 4.8, image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=400", description: "Классический набор из 484 деталей разных цветов. Развивает воображение и мелкую моторику.", age: "4-99" },
+      { id: 2, title: "Развивающий коврик Tiny Love", category: "Для малышей", brand: "Tiny Love", price: 3590, stock: 8, rating: 4.9, image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400", description: "Яркий коврик с дугами и подвесными игрушками для детей от 0 до 12 месяцев.", age: "0-1" },
+      { id: 3, title: "Настольная игра Монополия Классическая", category: "Настольные игры", brand: "Hasbro", price: 1890, stock: 22, rating: 4.7, image: "https://images.unsplash.com/photo-1610890716171-6b1c9f2bd40c?w=400", description: "Легендарная экономическая игра для всей семьи. 2-6 игроков.", age: "8+" },
+      { id: 4, title: "Кукла Barbie Модница", category: "Куклы", brand: "Mattel", price: 1290, stock: 30, rating: 4.5, image: "https://images.unsplash.com/photo-1558877385-8c1b8d0c9b1e?w=400", description: "Кукла в модном наряде с аксессуарами. Высота 30 см.", age: "3+" },
+      { id: 5, title: "Машинка Hot Wheels трек", category: "Машинки", brand: "Hot Wheels", price: 2190, stock: 12, rating: 4.6, image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400", description: "Гоночный трек с петлёй и одной машинкой в комплекте.", age: "4+" },
+      { id: 6, title: "Пазл Ravensburger 1000 деталей", category: "Пазлы", brand: "Ravensburger", price: 990, stock: 40, rating: 4.8, image: "https://images.unsplash.com/photo-1606081480183-26dae95dc28f?w=400", description: "Красочный пазл с изображением природы. Развивает усидчивость.", age: "10+" },
+      { id: 7, title: "Мягкая игрушка Мишка Тедди", category: "Мягкие игрушки", brand: "Игрушкин", price: 790, stock: 50, rating: 4.9, image: "https://images.unsplash.com/photo-1559715541-5daf8a0296d0?w=400", description: "Плюшевый мишка 40 см. Гипоаллергенный наполнитель.", age: "0+" },
+      { id: 8, title: "Набор для опытов Юный химик", category: "Развивающие", brand: "Steampunk", price: 1590, stock: 18, rating: 4.7, image: "https://images.unsplash.com/photo-1530053969600-caed2596d242?w=400", description: "20 безопасных опытов для детей. Инструкция на русском языке.", age: "8+" }
+    ];
+
+    const clientsData = [
+      { id: 1, name: "Анна Смирнова", email: "anna@mail.ru", phone: "+7-900-111-22-33", address: "Москва, ул. Ленина, 10", password: "123456", role: "user" },
+      { id: 2, name: "Администратор", email: "admin@igroteka.ru", phone: "+7-900-000-00-00", address: "Юрга, ул. Победы, 1", password: "admin", role: "admin" }
+    ];
+
+    const ordersData = [
+      { id: 1001, clientId: 1, date: "2026-11-01", status: "completed", items: [{ productId: 1, quantity: 1, price: 2490 }, { productId: 7, quantity: 2, price: 790 }], total: 4070 },
+      { id: 1002, clientId: 1, date: "2026-11-05", status: "pending", items: [{ productId: 3, quantity: 1, price: 1890 }], total: 1890 }
+    ];
+
+    function loadData(key, def) { const v = localStorage.getItem(key); return v ? JSON.parse(v) : def; }
+    function saveData(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+
+    let products = loadData('ig_products', productsData);
+    let clients = loadData('ig_clients', clientsData);
+    let orders = loadData('ig_orders', ordersData);
+    let cart = loadData('ig_cart', []);
+    let currentUser = loadData('ig_user', null);
+
+    function saveAll() { saveData('ig_products', products); saveData('ig_clients', clients); saveData('ig_orders', orders); saveData('ig_cart', cart); saveData('ig_user', currentUser); }
+
+    function showPage(name, data) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const el = document.getElementById('page-' + name);
+      if (el) { el.classList.add('active'); window.scrollTo(0, 0); }
+      else { document.getElementById('page-404').classList.add('active'); }
+      if (name === 'home') renderHome();
+      if (name === 'catalog') renderCatalog();
+      if (name === 'product') renderProduct(data);
+      if (name === 'cart') renderCart();
+      if (name === 'checkout') renderCheckout();
+      if (name === 'profile') renderProfile();
+      if (name === 'adminProducts') renderAdminProducts();
+      if (name === 'adminOrders') renderAdminOrders();
+      updateHeader();
+    }
+
+    function updateHeader() {
+      document.getElementById('cartCount').textContent = cart.reduce((s, i) => s + i.quantity, 0);
+      const ua = document.getElementById('userArea');
+      const al = document.getElementById('adminLink');
+      if (currentUser) {
+        ua.innerHTML = `<button class="btn btn--ghost" onclick="showPage('profile')">${currentUser.name.split(' ')[0]}</button><button class="btn btn--ghost" onclick="logout()">Выйти</button>`;
+        al.style.display = currentUser.role === 'admin' ? 'inline' : 'none';
+      } else {
+        ua.innerHTML = `<button class="btn btn--ghost" onclick="showPage('login')">Войти</button>`;
+        al.style.display = 'none';
+      }
+    }
+
+    function renderHome() {
+      const popular = [...products].sort((a,b) => b.rating - a.rating).slice(0, 4);
+      const newItems = products.slice(0, 4);
+      document.getElementById('popularProducts').innerHTML = popular.map(p => productCardHTML(p)).join('');
+      document.getElementById('newProducts').innerHTML = newItems.map(p => productCardHTML(p)).join('');
+    }
+
+    function productCardHTML(p) {
+      return `<div class="product-card"><img class="product-card__img" src="${p.image}" alt="${p.title}" onclick="showPage('product', ${p.id})" /><div class="product-card__body"><h3 class="product-card__title" onclick="showPage('product', ${p.id})">${p.title}</h3><div style="font-size:13px;color:#888;margin-bottom:8px">⭐ ${p.rating} · ${p.brand}</div><div class="product-card__price">${p.price} ₽</div><button class="btn btn--primary" style="margin-top:10px" onclick="addToCart(${p.id})">В корзину</button></div></div>`;
+    }
+
+    function renderCatalog() {
+      const cats = [...new Set(products.map(p => p.category))];
+      const sel = document.getElementById('filterCategory');
+      const cur = sel.value;
+      sel.innerHTML = '<option value="">Все</option>' + cats.map(c => `<option ${c===cur?'selected':''}>${c}</option>`).join('');
+      let list = [...products];
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const cat = document.getElementById('filterCategory').value;
+      const price = +document.getElementById('filterPrice').value;
+      const sort = document.getElementById('filterSort').value;
+      if (search) list = list.filter(p => p.title.toLowerCase().includes(search));
+      if (cat) list = list.filter(p => p.category === cat);
+      list = list.filter(p => p.price <= price);
+      if (sort === 'price_asc') list.sort((a,b) => a.price - b.price);
+      if (sort === 'price_desc') list.sort((a,b) => b.price - a.price);
+      if (sort === 'rating') list.sort((a,b) => b.rating - a.rating);
+      document.getElementById('catalogCount').textContent = list.length;
+      document.getElementById('catalogProducts').innerHTML = list.length ? list.map(p => productCardHTML(p)).join('') : '<p>Ничего не найдено</p>';
+    }
+
+    function doSearch() { showPage('catalog'); }
+
+    function renderProduct(id) {
+      const p = products.find(x => x.id === id);
+      if (!p) { document.getElementById('productPageContent').innerHTML = '<div class="notfound"><h1>Товар не найден</h1></div>'; return; }
+      document.getElementById('productPageContent').innerHTML = `<img class="product-page__img" src="${p.image}" alt="${p.title}" /><div class="product-page__info"><h1>${p.title}</h1><div style="color:#888">Артикул: ${p.id} · ${p.brand}</div><div class="product-page__price">${p.price} ₽</div><p style="margin:16px 0">${p.description}</p><p><b>Категория:</b> ${p.category}</p><p><b>Возраст:</b> ${p.age}</p><p><b>В наличии:</b> ${p.stock} шт.</p><p><b>Рейтинг:</b> ⭐ ${p.rating}</p><div style="display:flex;gap:10px;margin-top:20px;align-items:center"><input type="number" id="prodQty" min="1" max="${p.stock}" value="1" style="width:70px;padding:8px" /><button class="btn btn--primary" onclick="addToCart(${p.id}, +document.getElementById('prodQty').value)">В корзину</button></div></div>`;
+    }
+
+    function addToCart(id, qty = 1) {
+      const p = products.find(x => x.id === id);
+      if (!p) return;
+      const existing = cart.find(i => i.productId === id);
+      if (existing) existing.quantity += qty;
+      else cart.push({ productId: id, quantity: qty, price: p.price, title: p.title, image: p.image });
+      saveAll();
+      updateHeader();
+      alert('Товар добавлен в корзину!');
+    }
+
+    function renderCart() {
+      const el = document.getElementById('cartContent');
+      if (cart.length === 0) { el.innerHTML = '<div class="notfound"><h1>Корзина пуста</h1><button class="btn btn--primary" onclick="showPage(\'catalog\')">Перейти в каталог</button></div>'; return; }
+      const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+      el.innerHTML = `<h1>Корзина</h1>` + cart.map(i => `<div class="cart-item"><img src="${i.image}" alt="${i.title}" /><div><div><b>${i.title}</b></div><div>${i.price} ₽</div></div><div><button onclick="changeQty(${i.productId}, -1)">-</button><span style="margin:0 8px">${i.quantity}</span><button onclick="changeQty(${i.productId}, 1)">+</button></div><div><b>${i.price * i.quantity} ₽</b><button onclick="removeFromCart(${i.productId})" style="margin-left:10px;color:#d33">✕</button></div></div>`).join('') + `<div class="cart-summary"><div>Итого: <span class="cart-summary__total">${total} ₽</span></div><div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn" onclick="clearCart()">Очистить</button><button class="btn btn--primary" onclick="goCheckout()">Оформить заказ</button></div></div>`;
+    }
+
+    function changeQty(id, d) { const i = cart.find(x => x.productId === id); if (!i) return; i.quantity += d; if (i.quantity <= 0) cart = cart.filter(x => x.productId !== id); saveAll(); renderCart(); updateHeader(); }
+    function removeFromCart(id) { cart = cart.filter(x => x.productId !== id); saveAll(); renderCart(); updateHeader(); }
+    function clearCart() { cart = []; saveAll(); renderCart(); updateHeader(); }
+    function goCheckout() { if (!currentUser) { alert('Войдите в аккаунт для оформления заказа'); showPage('login'); return; } showPage('checkout'); }
+
+    function renderCheckout() {
+      if (currentUser) { document.getElementById('coName').value = currentUser.name; document.getElementById('coPhone').value = currentUser.phone; document.getElementById('coAddress').value = currentUser.address; }
+      const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+      document.getElementById('coTotal').textContent = total;
+    }
+
+    function submitOrder(e) {
+      e.preventDefault();
+      const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+      const newOrder = { id: Math.max(0, ...orders.map(o => o.id)) + 1, clientId: currentUser.id, date: new Date().toISOString().slice(0, 10), status: 'pending', items: cart.map(i => ({ productId: i.productId, quantity: i.quantity, price: i.price })), total };
+      orders.push(newOrder);
+      cart = [];
+      saveAll();
+      alert('Заказ №' + newOrder.id + ' оформлен!');
+      showPage('profile');
+    }
+
+    function doLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const pass = document.getElementById('loginPassword').value;
+      const user = clients.find(c => c.email === email && c.password === pass);
+      if (user) { currentUser = user; saveAll(); showPage('profile'); }
+      else { document.getElementById('loginError').textContent = 'Неверный email или пароль'; }
+    }
+
+    function doRegister(e) {
+      e.preventDefault();
+      const email = document.getElementById('regEmail').value;
+      if (clients.find(c => c.email === email)) { document.getElementById('regError').textContent = 'Пользователь уже существует'; return; }
+      const newUser = { id: Math.max(0, ...clients.map(c => c.id)) + 1, name: document.getElementById('regName').value, email, phone: document.getElementById('regPhone').value, address: document.getElementById('regAddress').value, password: document.getElementById('regPassword').value, role: 'user' };
+      clients.push(newUser);
+      currentUser = newUser;
+      saveAll();
+      showPage('profile');
+    }
+
+    function logout() { currentUser = null; saveAll(); showPage('home'); }
+
+    function renderProfile() {
+      if (!currentUser) { showPage('login'); return; }
+      const myOrders = orders.filter(o => o.clientId === currentUser.id);
+      document.getElementById('profileContent').innerHTML = `<h1>Личный кабинет</h1><div style="background:#fff;padding:20px;border-radius:12px;margin-bottom:20px"><p><b>ФИО:</b> ${currentUser.name}</p><p><b>Email:</b> ${currentUser.email}</p><p><b>Телефон:</b> ${currentUser.phone}</p><p><b>Адрес:</b> ${currentUser.address}</p></div><h2>История заказов</h2>${myOrders.length === 0 ? '<p>Заказов пока нет</p>' : `<table class="admin-table"><thead><tr><th>№</th><th>Дата</th><th>Сумма</th><th>Статус</th></tr></thead><tbody>${myOrders.map(o => `<tr><td>${o.id}</td><td>${o.date}</td><td>${o.total} ₽</td><td>${o.status === 'completed' ? '✅ Доставлен' : o.status === 'pending' ? '⏳ В обработке' : o.status}</td></tr>`).join('')}</tbody></table>`}${currentUser.role === 'admin' ? '<button class="btn btn--primary" style="margin-top:20px" onclick="showPage(\'adminOrders\')">Управление заказами</button>' : ''}`;
+    }
+
+    function renderAdminProducts() {
+      if (!currentUser || currentUser.role !== 'admin') { showPage('home'); return; }
+      document.getElementById('adminProductsContent').innerHTML = `<h1>Админ-панель: Товары</h1><table class="admin-table"><thead><tr><th>ID</th><th>Название</th><th>Цена</th><th>Остаток</th><th>Действия</th></tr></thead><tbody>${products.map(p => `<tr><td>${p.id}</td><td>${p.title}</td><td>${p.price} ₽</td><td>${p.stock}</td><td><button class="btn" onclick="editProduct(${p.id})">Ред.</button><button class="btn" style="color:#d33;margin-left:8px" onclick="deleteProduct(${p.id})">Уд.</button></td></tr>`).join('')}</tbody></table><h2 style="margin-top:20px">Добавить товар</h2><form class="form" onsubmit="addProduct(event)" style="max-width:600px"><div class="form-field"><label>Название</label><input id="apTitle" required/></div><div class="form-field"><label>Категория</label><input id="apCat" required/></div><div class="form-field"><label>Бренд</label><input id="apBrand" required/></div><div class="form-field"><label>Цена</label><input id="apPrice" type="number" required/></div><div class="form-field"><label>Остаток</label><input id="apStock" type="number" required/></div><div class="form-field"><label>URL картинки</label><input id="apImg" required/></div><div class="form-field"><label>Описание</label><input id="apDesc" required/></div><div class="form-field"><label>Возраст</label><input id="apAge" required/></div><button class="btn btn--primary" style="width:100%">Добавить</button></form>`;
+    }
+
+    function addProduct(e) {
+      e.preventDefault();
+      const p = { id: Math.max(0, ...products.map(x => x.id)) + 1, title: document.getElementById('apTitle').value, category: document.getElementById('apCat').value, brand: document.getElementById('apBrand').value, price: +document.getElementById('apPrice').value, stock: +document.getElementById('apStock').value, image: document.getElementById('apImg').value, description: document.getElementById('apDesc').value, age: document.getElementById('apAge').value, rating: 4.5 };
+      products.push(p);
+      saveAll();
+      renderAdminProducts();
+      alert('Товар добавлен!');
+    }
+
+    function editProduct(id) { const p = products.find(x => x.id === id); const newPrice = prompt('Новая цена:', p.price); const newStock = prompt('Новый остаток:', p.stock); if (newPrice !== null) p.price = +newPrice; if (newStock !== null) p.stock = +newStock; saveAll(); renderAdminProducts(); }
+    function deleteProduct(id) { if (!confirm('Удалить товар?')) return; products = products.filter(x => x.id !== id); saveAll(); renderAdminProducts(); }
+
+    function renderAdminOrders() {
+      if (!currentUser || currentUser.role !== 'admin') { showPage('home'); return; }
+      document.getElementById('adminOrdersContent').innerHTML = `<h1>Админ-панель: Заказы</h1><table class="admin-table"><thead><tr><th>№</th><th>Дата</th><th>Клиент ID</th><th>Сумма</th><th>Статус</th><th>Действие</th></tr></thead><tbody>${orders.map(o => `<tr><td>${o.id}</td><td>${o.date}</td><td>${o.clientId}</td><td>${o.total} ₽</td><td>${o.status}</td><td><select onchange="changeOrderStatus(${o.id}, this.value)"><option value="pending" ${o.status==='pending'?'selected':''}>В обработке</option><option value="confirmed" ${o.status==='confirmed'?'selected':''}>Подтверждён</option><option value="shipped" ${o.status==='shipped'?'selected':''}>Отправлен</option><option value="completed" ${o.status==='completed'?'selected':''}>Доставлен</option><option value="cancelled" ${o.status==='cancelled'?'selected':''}>Отменён</option></select></td></tr>`).join('')}</tbody></table>`;
+    }
+
+    function changeOrderStatus(id, status) { const o = orders.find(x => x.id === id); if (o) { o.status = status; saveAll(); } }
+
+    saveAll();
+    showPage('home');
+  </script>
 </body>
 </html>
