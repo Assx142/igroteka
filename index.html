@@ -206,6 +206,8 @@
     /* FOOTER */
     .footer { background: #2c3e50; color: #fff; padding: 48px 0 24px; margin-top: 60px; }
     .footer__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .footer a { color: #ccc; }
+    .footer a:hover { color: #ff6b35; }
     
     /* NOT FOUND */
     .notfound { text-align: center; padding: 100px 0; }
@@ -249,6 +251,7 @@
   </header>
 
   <main>
+    <!-- ГЛАВНАЯ -->
     <div id="page-home" class="page active">
       <section class="hero">
         <div class="container">
@@ -267,6 +270,7 @@
       </section>
     </div>
 
+    <!-- КАТАЛОГ -->
     <div id="page-catalog" class="page">
       <div class="container catalog">
         <aside class="filters">
@@ -284,14 +288,17 @@
       </div>
     </div>
 
+    <!-- ТОВАР -->
     <div id="page-product" class="page">
       <div class="container"><div class="product-page" id="productPageContent"></div></div>
     </div>
 
+    <!-- КОРЗИНА -->
     <div id="page-cart" class="page">
       <div class="container cart" id="cartContent"></div>
     </div>
 
+    <!-- ОФОРМЛЕНИЕ -->
     <div id="page-checkout" class="page">
       <div class="container">
         <h1 class="section-title">Оформление заказа</h1>
@@ -307,6 +314,7 @@
       </div>
     </div>
 
+    <!-- ВХОД -->
     <div id="page-login" class="page">
       <form class="form" onsubmit="doLogin(event)">
         <h2>Вход</h2>
@@ -318,6 +326,7 @@
       </form>
     </div>
 
+    <!-- РЕГИСТРАЦИЯ -->
     <div id="page-register" class="page">
       <form class="form" onsubmit="doRegister(event)">
         <h2>Регистрация</h2>
@@ -332,21 +341,25 @@
       </form>
     </div>
 
+    <!-- ПРОФИЛЬ -->
     <div id="page-profile" class="page">
       <div class="container" style="padding:40px 20px" id="profileContent"></div>
     </div>
 
+    <!-- АДМИН ТОВАРЫ -->
     <div id="page-adminProducts" class="page">
       <div class="container" style="padding:40px 20px" id="adminProductsContent"></div>
     </div>
 
+    <!-- АДМИН ЗАКАЗЫ -->
     <div id="page-adminOrders" class="page">
       <div class="container" style="padding:40px 20px" id="adminOrdersContent"></div>
     </div>
 
+    <!-- РУКОВОДСТВО -->
     <div id="page-guide" class="page">
       <div class="container" style="padding:40px 20px;max-width:900px">
-        <h1 class="section-title">📖 Руководство оператора</h1>
+        <h1 class="section-title"> Руководство оператора</h1>
         <div style="background:#fff;padding:32px;border-radius:16px;line-height:1.8">
           <h2 style="color:#ff6b35;margin-bottom:16px">1. Вход в систему</h2>
           <p>Для входа в админ-панель используйте данные администратора:</p>
@@ -382,6 +395,75 @@
       </div>
     </div>
 
+    <!-- ДОСТАВКА -->
+    <div id="page-delivery" class="page">
+      <div class="container" style="padding:40px 20px;max-width:900px">
+        <h1 class="section-title">🚚 Доставка и оплата</h1>
+        <div style="background:#fff;padding:32px;border-radius:16px;line-height:1.8">
+          <h2 style="color:#ff6b35;margin-bottom:16px">Способы доставки</h2>
+          <ul style="margin:12px 0 24px 24px">
+            <li><b>Курьер по городу</b> — 300 ₽, доставка 1-2 дня</li>
+            <li><b>Самовывоз</b> — бесплатно, пункт выдачи по адресу г. Юрга, ул. Победы, 1</li>
+            <li><b>Почта России</b> — от 250 ₽, доставка 5-14 дней</li>
+          </ul>
+          <h2 style="color:#ff6b35;margin-bottom:16px">Способы оплаты</h2>
+          <ul style="margin:12px 0 24px 24px">
+            <li>💳 Банковской картой онлайн</li>
+            <li>📱 СБП (Система быстрых платежей)</li>
+            <li>💵 Наличными при получении</li>
+          </ul>
+          <p>Бесплатная доставка при заказе от 3000 ₽!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ВОЗВРАТ -->
+    <div id="page-returns" class="page">
+      <div class="container" style="padding:40px 20px;max-width:900px">
+        <h1 class="section-title">↩️ Возврат товара</h1>
+        <div style="background:#fff;padding:32px;border-radius:16px;line-height:1.8">
+          <h2 style="color:#ff6b35;margin-bottom:16px">Условия возврата</h2>
+          <ul style="margin:12px 0 24px 24px">
+            <li>Возврат в течение <b>14 дней</b> с момента покупки</li>
+            <li>Товар должен быть в оригинальной упаковке</li>
+            <li>Сохранён товарный вид и потребительские свойства</li>
+            <li>Имеется чек или подтверждение покупки</li>
+          </ul>
+          <h2 style="color:#ff6b35;margin-bottom:16px">Как оформить возврат</h2>
+          <ol style="margin:12px 0 24px 24px">
+            <li>Свяжитесь с нами по телефону 8-800-555-35-35</li>
+            <li>Заполните заявление на возврат</li>
+            <li>Отправьте товар обратно</li>
+            <li>Деньги вернутся в течение 10 рабочих дней</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- ГАРАНТИЯ -->
+    <div id="page-warranty" class="page">
+      <div class="container" style="padding:40px 20px;max-width:900px">
+        <h1 class="section-title">🛡️ Гарантия</h1>
+        <div style="background:#fff;padding:32px;border-radius:16px;line-height:1.8">
+          <h2 style="color:#ff6b35;margin-bottom:16px">Гарантийные обязательства</h2>
+          <ul style="margin:12px 0 24px 24px">
+            <li>Гарантия на все товары — <b>12 месяцев</b></li>
+            <li>Гарантия на электронные игрушки — <b>24 месяца</b></li>
+            <li>Бесплатный ремонт в течение гарантийного срока</li>
+            <li>Замена товара при обнаружении заводского брака</li>
+          </ul>
+          <h2 style="color:#ff6b35;margin-bottom:16px">Гарантия не распространяется на</h2>
+          <ul style="margin:12px 0 24px 24px">
+            <li>Механические повреждения</li>
+            <li>Повреждения от неправильной эксплуатации</li>
+            <li>Естественный износ</li>
+          </ul>
+          <p>По всем гарантийным вопросам обращайтесь: 8-800-555-35-35</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 404 -->
     <div id="page-404" class="page">
       <div class="container notfound"><h1>404</h1><p style="font-size:20px;margin-bottom:24px">Страница не найдена</p><button class="btn btn--primary" style="padding:14px 32px" onclick="showPage('home')">На главную</button></div>
     </div>
@@ -391,26 +473,31 @@
     <div class="container footer__grid">
       <div><h3>🧸 ИГРОТЕКА</h3><p>Магазин детских игрушек</p></div>
       <div><h4>Контакты</h4><p>📞 8-800-555-35-35</p><p>✉️ info@igroteka.ru</p><p>📍 г. Юрга, ул. Победы, 1</p></div>
-      <div><h4>Покупателям</h4><p>Доставка и оплата</p><p>Возврат товара</p><p>Гарантия</p></div>
+      <div>
+        <h4>Покупателям</h4>
+        <p><a onclick="showPage('delivery')">Доставка и оплата</a></p>
+        <p><a onclick="showPage('returns')">Возврат товара</a></p>
+        <p><a onclick="showPage('warranty')">Гарантия</a></p>
+      </div>
     </div>
   </footer>
 
   <script>
-    // ДАННЫЕ (как в методичке)
+    // ДАННЫЕ
     const productsData = [
-  { id: 1, title: "Конструктор LEGO Classic 10696", category: "Конструкторы", brand: "LEGO", price: 2490, stock: 15, rating: 4.8, image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=400&h=300&fit=crop", description: "Классический набор из 484 деталей разных цветов. Развивает воображение и мелкую моторику.", age: "4-99" },
-  { id: 2, title: "Развивающий коврик Tiny Love", category: "Для малышей", brand: "Tiny Love", price: 3590, stock: 8, rating: 4.9, image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&h=300&fit=crop", description: "Яркий коврик с дугами и подвесными игрушками для детей от 0 до 12 месяцев.", age: "0-1" },
-  { id: 3, title: "Монополия Классическая", category: "Настольные игры", brand: "Hasbro", price: 1890, stock: 22, rating: 4.7, image: "https://images.unsplash.com/photo-1610890716171-6b1c9f2bd40c?w=400&h=300&fit=crop", description: "Легендарная экономическая игра для всей семьи. 2-6 игроков.", age: "8+" },
-  { id: 4, title: "Кукла Barbie Модница", category: "Куклы", brand: "Mattel", price: 1290, stock: 30, rating: 4.5, image: "https://images.unsplash.com/photo-1558877385-8c1b8d0c9b1e?w=400&h=300&fit=crop", description: "Кукла в модном наряде с аксессуарами. Высота 30 см.", age: "3+" },
-  { id: 5, title: "Машинка Hot Wheels трек", category: "Машинки", brand: "Hot Wheels", price: 2190, stock: 12, rating: 4.6, image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop", description: "Гоночный трек с петлёй и одной машинкой в комплекте.", age: "4+" },
-  { id: 6, title: "Пазл Ravensburger 1000 деталей", category: "Пазлы", brand: "Ravensburger", price: 990, stock: 40, rating: 4.8, image: "https://images.unsplash.com/photo-1606081480183-26dae95dc28f?w=400&h=300&fit=crop", description: "Красочный пазл с изображением природы. Развивает усидчивость.", age: "10+" },
-  { id: 7, title: "Мишка Тедди", category: "Мягкие игрушки", brand: "Игрушкин", price: 790, stock: 50, rating: 4.9, image: "https://images.unsplash.com/photo-1559715541-5daf8a0296d0?w=400&h=300&fit=crop", description: "Плюшевый мишка 40 см. Гипоаллергенный наполнитель.", age: "0+" },
-  { id: 8, title: "Набор Юный химик", category: "Развивающие", brand: "Steampunk", price: 1590, stock: 18, rating: 4.7, image: "https://images.unsplash.com/photo-1530053969600-caed2596d242?w=400&h=300&fit=crop", description: "20 безопасных опытов для детей. Инструкция на русском языке.", age: "8+" },
-  { id: 9, title: "Железная дорога", category: "Машинки", brand: "Brio", price: 4590, stock: 7, rating: 4.8, image: "https://images.unsplash.com/photo-1473091534298-04dcbce3278c?w=400&h=300&fit=crop", description: "Железная дорога с поездом и станцией.", age: "3+" },
-  { id: 10, title: "Набор доктора", category: "Ролевые игры", brand: "Kidkraft", price: 1890, stock: 14, rating: 4.6, image: "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?w=400&h=300&fit=crop", description: "Игровой набор доктора с инструментами.", age: "3+" },
-  { id: 11, title: "Пирамидка", category: "Для малышей", brand: "Fisher-Price", price: 590, stock: 35, rating: 4.7, image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=400&h=300&fit=crop", description: "Классическая развивающая пирамидка.", age: "1+" },
-  { id: 12, title: "Шахматы", category: "Настольные игры", brand: "Весна", price: 1290, stock: 20, rating: 4.9, image: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=400&h=300&fit=crop", description: "Деревянные шахматы с доской.", age: "6+" }
-];
+      { id: 1, title: "Конструктор LEGO Classic 10696", category: "Конструкторы", brand: "LEGO", price: 2490, stock: 15, rating: 4.8, image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=400&h=300&fit=crop", description: "Классический набор из 484 деталей разных цветов. Развивает воображение и мелкую моторику.", age: "4-99" },
+      { id: 2, title: "Развивающий коврик Tiny Love", category: "Для малышей", brand: "Tiny Love", price: 3590, stock: 8, rating: 4.9, image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&h=300&fit=crop", description: "Яркий коврик с дугами и подвесными игрушками для детей от 0 до 12 месяцев.", age: "0-1" },
+      { id: 3, title: "Монополия Классическая", category: "Настольные игры", brand: "Hasbro", price: 1890, stock: 22, rating: 4.7, image: "https://images.unsplash.com/photo-1610890716171-6b1c9f2bd40c?w=400&h=300&fit=crop", description: "Легендарная экономическая игра для всей семьи. 2-6 игроков.", age: "8+" },
+      { id: 4, title: "Кукла Barbie Модница", category: "Куклы", brand: "Mattel", price: 1290, stock: 30, rating: 4.5, image: "https://images.unsplash.com/photo-1558877385-8c1b8d0c9b1e?w=400&h=300&fit=crop", description: "Кукла в модном наряде с аксессуарами. Высота 30 см.", age: "3+" },
+      { id: 5, title: "Машинка Hot Wheels трек", category: "Машинки", brand: "Hot Wheels", price: 2190, stock: 12, rating: 4.6, image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop", description: "Гоночный трек с петлёй и одной машинкой в комплекте.", age: "4+" },
+      { id: 6, title: "Пазл Ravensburger 1000 деталей", category: "Пазлы", brand: "Ravensburger", price: 990, stock: 40, rating: 4.8, image: "https://images.unsplash.com/photo-1606081480183-26dae95dc28f?w=400&h=300&fit=crop", description: "Красочный пазл с изображением природы. Развивает усидчивость.", age: "10+" },
+      { id: 7, title: "Мишка Тедди", category: "Мягкие игрушки", brand: "Игрушкин", price: 790, stock: 50, rating: 4.9, image: "https://images.unsplash.com/photo-1559715541-5daf8a0296d0?w=400&h=300&fit=crop", description: "Плюшевый мишка 40 см. Гипоаллергенный наполнитель.", age: "0+" },
+      { id: 8, title: "Набор Юный химик", category: "Развивающие", brand: "Steampunk", price: 1590, stock: 18, rating: 4.7, image: "https://images.unsplash.com/photo-1530053969600-caed2596d242?w=400&h=300&fit=crop", description: "20 безопасных опытов для детей. Инструкция на русском языке.", age: "8+" },
+      { id: 9, title: "Железная дорога", category: "Машинки", brand: "Brio", price: 4590, stock: 7, rating: 4.8, image: "https://images.unsplash.com/photo-1473091534298-04dcbce3278c?w=400&h=300&fit=crop", description: "Железная дорога с поездом и станцией.", age: "3+" },
+      { id: 10, title: "Набор доктора", category: "Ролевые игры", brand: "Kidkraft", price: 1890, stock: 14, rating: 4.6, image: "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?w=400&h=300&fit=crop", description: "Игровой набор доктора с инструментами.", age: "3+" },
+      { id: 11, title: "Пирамидка", category: "Для малышей", brand: "Fisher-Price", price: 590, stock: 35, rating: 4.7, image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=400&h=300&fit=crop", description: "Классическая развивающая пирамидка.", age: "1+" },
+      { id: 12, title: "Шахматы", category: "Настольные игры", brand: "Весна", price: 1290, stock: 20, rating: 4.9, image: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=400&h=300&fit=crop", description: "Деревянные шахматы с доской.", age: "6+" }
+    ];
 
     const clientsData = [
       { id: 1, name: "Анна Смирнова", email: "anna@mail.ru", phone: "+7-900-111-22-33", address: "Москва, ул. Ленина, 10", password: "123456", role: "user" },
@@ -504,14 +591,12 @@
       
       document.getElementById('catalogCount').textContent = list.length;
       
-      // ПАГИНАЦИЯ
       const totalPages = Math.ceil(list.length / itemsPerPage);
       const start = (currentPage - 1) * itemsPerPage;
       const pageItems = list.slice(start, start + itemsPerPage);
       
       document.getElementById('catalogProducts').innerHTML = pageItems.length ? pageItems.map(p => productCardHTML(p)).join('') : '<p style="text-align:center;padding:40px">Ничего не найдено</p>';
       
-      // Кнопки пагинации
       let paginationHTML = '';
       if (totalPages > 1) {
         paginationHTML += `<button ${currentPage===1?'disabled':''} onclick="currentPage=1;renderCatalog()">«</button>`;
